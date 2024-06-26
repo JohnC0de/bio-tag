@@ -23,7 +23,7 @@ Bio Tag é um projeto desenvolvido para ajudar biólogos que trabalham com taxid
 
 ### Gerar Etiquetas
 
-1. Acesse a aplicação em `http://localhost:5173/`.
+1. Acesse a aplicação em `http://localhost:3000/`.
 2. Preencha as informações necessárias para a etiqueta.
 3. Gere o PDF com as etiquetas no formato A4.
 
