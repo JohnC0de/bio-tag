@@ -12,8 +12,8 @@ export function Navbar() {
           <p className="text-lg">Bio Tag</p>
         </Link>
       </Button>
-      <Button className="ml-auto shadow" variant="ghost">
-        Etiquetas
+      <Button asChild className="ml-auto shadow" variant="ghost">
+        <Link href="/etiquetas">Etiquetas</Link>
       </Button>
       <div>
         <ThemeToggler />

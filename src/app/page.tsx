@@ -20,7 +20,7 @@ export default function HomePage() {
               className="h-10 w-64 text-lg text-primary drop-shadow-xl"
               variant="outline"
             >
-              <Link href="#">Começar</Link>
+              <Link href="/etiquetas">Começar</Link>
             </Button>
           </div>
         </div>
@@ -36,7 +36,7 @@ export default function HomePage() {
           </p>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Button asChild className="h-10 drop-shadow-xl">
-              <Link href="#" prefetch={false}>
+              <Link href="/etiquetas" prefetch={false}>
                 Gerar Etiquetas
               </Link>
             </Button>
@@ -45,7 +45,7 @@ export default function HomePage() {
               className="h-10 text-primary drop-shadow-xl"
               variant="outline"
             >
-              <Link href="#" prefetch={false}>
+              <Link href="/etiquetas" prefetch={false}>
                 Modelo de Etiqueta
               </Link>
             </Button>
@@ -54,7 +54,7 @@ export default function HomePage() {
               className="h-10 text-primary drop-shadow-xl"
               variant="outline"
             >
-              <Link href="#" prefetch={false}>
+              <Link href="/etiquetas" prefetch={false}>
                 Tutorial
               </Link>
             </Button>
