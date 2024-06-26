@@ -7,7 +7,7 @@ import { GeistSans } from "geist/font/sans";
 import { Toaster } from "sonner";
 
 export const metadata = {
-  title: "Bio Tag",
+  title: "Bio Tag - 🏷️",
   description: "Etiquetas para Biólogos!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };

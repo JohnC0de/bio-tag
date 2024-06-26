@@ -1,21 +1,21 @@
 import { ThemeToggler } from "@/components/theme/toggler";
 import { Button } from "@/components/ui/button";
-import { TagIcon } from "lucide-react";
+import { LeafIcon } from "lucide-react";
 import Link from "next/link";
 
 export function Navbar() {
   return (
-    <nav className="flex items-center gap-2 border-b p-2">
-      <Button asChild variant="ghost">
+    <nav className="flex items-center gap-2 border-b bg-secondary p-4 drop-shadow-2xl">
+      <Button asChild variant="ghost" className="text-primary shadow">
         <Link href="/" className="flex items-center justify-center gap-2">
-          <TagIcon size={18} className="mt-0.5" />
-          <p className="text-x">Bio Tag</p>
+          <LeafIcon size={18} className="mt-0.5" />
+          <p className="text-lg">Bio Tag</p>
         </Link>
       </Button>
-      <Button className="ml-2" variant="outline">
+      <Button className="ml-auto shadow" variant="ghost">
         Etiquetas
       </Button>
-      <div className="ml-auto">
+      <div>
         <ThemeToggler />
       </div>
     </nav>
