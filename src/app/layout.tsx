@@ -1,3 +1,5 @@
+import { Navbar } from "@/components/layout/navbar";
+import { ThemeProvider } from "@/components/theme/provider";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
@@ -17,12 +19,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={cn('flex min-h-screen flex-col bg-background font-sans antialiased', GeistSans.variable)}>
-     <div className="flex min-h-screen flex-col">
-          {/* <Navbar /> */}
-          {children}
-          {/* <Footer /> */}
-        </div>
+      <body
+        className={cn(
+          "flex min-h-screen flex-col bg-background font-sans antialiased",
+          GeistSans.variable,
+        )}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            {children}
+            {/* <Footer /> */}
+          </div>
+        </ThemeProvider>
         <Toaster richColors />
       </body>
     </html>
