@@ -12,17 +12,29 @@ import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
  */
 export const createTable = sqliteTableCreator((name) => `bio-tag_${name}`);
 
-export const posts = createTable(
-  "post",
+export const etiquetasTable = createTable(
+  "etiqueta",
   {
     id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-    name: text("name", { length: 256 }),
+    npm: int("npm"),
+    name: text("name"),
+    date: int("created_at", { mode: "timestamp" }),
+    location: text("location"),
+    txd: text("txd"),
+
+    c_asa: text("c_asa"),
+    c_tarso: text("c_tarso"),
+    c_total: text("c_total"),
+    muda: text("muda"),
+    massa: text("massa"),
+    sexo: text("sexo"),
+    coletor: text("coletor"),
+
     createdAt: int("created_at", { mode: "timestamp" })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: int("updatedAt", { mode: "timestamp" }),
   },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
+  (table) => ({
+    nameIndex: index("name_idx").on(table.name),
   }),
 );

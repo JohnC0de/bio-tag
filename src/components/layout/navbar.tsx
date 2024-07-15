@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Navbar() {
   return (
-    <nav className="flex items-center gap-2 border-b bg-secondary p-4 drop-shadow-2xl">
+    <nav className="flex items-center gap-2 border-b bg-secondary p-4 drop-shadow">
       <Button asChild variant="ghost" className="text-primary shadow">
         <Link href="/" className="flex items-center justify-center gap-2">
           <LeafIcon size={18} className="mt-0.5" />
