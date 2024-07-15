@@ -59,7 +59,9 @@ export default function EtiquetasPage() {
         </AccordionItem>
       </Accordion>
       {/* <hr className="mt-4" /> */}
-      <DataTable data={etiquetas} columns={columns} />
+      <div className="overflow-auto">
+        <DataTable data={etiquetas} columns={columns} />
+      </div>
     </div>
   );
 }
