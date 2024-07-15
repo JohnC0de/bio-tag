@@ -62,7 +62,7 @@ export function CreateEtiquetaForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-4 gap-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4"
       >
         <FormInput
           form={form}
@@ -110,6 +110,13 @@ export function CreateEtiquetaForm() {
           type="number"
           placeholder="Ex: 81"
         />
+        <FormInput
+          form={form}
+          name="massa"
+          label="Massa"
+          type="number"
+          placeholder="Ex: 1375"
+        />
         <FormField
           control={form.control}
           name="muda"
@@ -131,13 +138,6 @@ export function CreateEtiquetaForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
-        <FormInput
-          form={form}
-          name="massa"
-          label="Massa"
-          type="number"
-          placeholder="Ex: 1375"
         />
         <FormField
           control={form.control}
