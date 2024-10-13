@@ -2,12 +2,12 @@
 
 import { store } from "@/lib/store";
 import type { Etiqueta } from "@/server/db/schema";
-import pdf from "html2pdf.js";
 import { useSnapshot } from "valtio";
 
 export default function PreviewEtiquetas() {
   const snap = useSnapshot(store);
   if (snap.etiquetas.length === 0) return null;
+
   return (
     <div className="bg-zinc-200">
       <div
@@ -18,32 +18,6 @@ export default function PreviewEtiquetas() {
           <Label key={i} data={d} />
         ))}
       </div>
-      <button
-        type="button"
-        onClick={() => {
-          const element = document.getElementById("print")!;
-          pdf()
-            .from(element)
-            .set({
-              jsPDF: {
-                unit: "mm",
-                format: "a4",
-                orientation: "portrait",
-                compression: false,
-                pagesplit: false,
-              },
-              html2canvas: {
-                scale: 4,
-                dpi: 600,
-                letterRendering: true,
-                useCORS: true,
-              },
-            })
-            .save();
-        }}
-      >
-        Click me
-      </button>
     </div>
   );
 }
