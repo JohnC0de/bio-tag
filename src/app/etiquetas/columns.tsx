@@ -1,6 +1,5 @@
 "use client";
 
-import type { Etiqueta } from "@/app/etiquetas/page";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -10,8 +9,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { store } from "@/lib/store";
+import type { Etiqueta } from "@/server/db/schema";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { type ColumnDef } from "@tanstack/react-table";
+import { CopyIcon, PenIcon, Trash2Icon } from "lucide-react";
+import { flushSync } from "react-dom";
 
 export const columns: ColumnDef<Etiqueta>[] = [
   {
@@ -22,17 +25,31 @@ export const columns: ColumnDef<Etiqueta>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={(value) => {
+          table.toggleAllPageRowsSelected(!!value);
+          store.etiquetas = table.getRowModel().rows.map((row) => row.original);
+          console.log(store.etiquetas); // Log store state directly
+        }}
         aria-label="Select all"
       />
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
+    cell: ({ row, table }) => {
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => {
+            flushSync(() => {
+              row.toggleSelected(!!value);
+            });
+            // Update store.etiquetas with all currently selected rows
+            store.etiquetas = table
+              .getSelectedRowModel()
+              .rows.map((row) => row.original);
+          }}
+          aria-label="Select row"
+        />
+      );
+    },
     enableSorting: false,
     enableHiding: false,
   },
@@ -47,10 +64,10 @@ export const columns: ColumnDef<Etiqueta>[] = [
   {
     accessorKey: "data",
     header: "Data",
-    accessorFn: ({ data }) => new Date(data).toLocaleDateString(),
+    accessorFn: ({ data }) => (data ? new Date(data).toLocaleDateString() : ""),
   },
   {
-    accessorKey: "location",
+    accessorKey: "localizacao",
     header: "Local",
   },
   {
@@ -88,21 +105,29 @@ export const columns: ColumnDef<Etiqueta>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      const original = row.original;
+    cell: () => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
+            <Button variant="outline" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
               <DotsHorizontalIcon className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem>Excluir</DropdownMenuItem>
-            <DropdownMenuItem>Editar</DropdownMenuItem>
-            <DropdownMenuItem>Duplicar</DropdownMenuItem>
+            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+              <p className="font-semibold">Excluir</p>
+              <Trash2Icon size={16} />
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+              <p className="font-semibold">Editar</p>
+              <PenIcon size={16} />
+            </DropdownMenuItem>
+            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+              <p className="font-semibold">Copiar</p>
+              <CopyIcon size={16} />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
