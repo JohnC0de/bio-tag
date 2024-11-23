@@ -15,6 +15,9 @@ import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { type ColumnDef } from '@tanstack/react-table'
 import { CopyIcon, PenIcon, Trash2Icon } from 'lucide-react'
 import { flushSync } from 'react-dom'
+import { deleteEtiqueta } from '@/app/actions/etiquetas'
+import { eq } from 'drizzle-orm'
+import { toast } from 'sonner'
 
 export const columns: ColumnDef<Etiqueta>[] = [
   {
@@ -100,7 +103,19 @@ export const columns: ColumnDef<Etiqueta>[] = [
   {
     id: 'actions',
     enableHiding: false,
-    cell: () => {
+    cell: ({ row }) => {
+      const etiqueta = row.original
+
+      async function handleDelete() {
+        try {
+          await deleteEtiqueta(etiqueta.id)
+          toast.success('Etiqueta excluída com sucesso!')
+        } catch (error) {
+          console.error('Error deleting etiqueta:', error)
+          toast.error('Erro ao excluir etiqueta')
+        }
+      }
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -111,7 +126,7 @@ export const columns: ColumnDef<Etiqueta>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+            <DropdownMenuItem className="flex justify-between gap-4 leading-3" onClick={handleDelete}>
               <p className="font-semibold">Excluir</p>
               <Trash2Icon size={16} />
             </DropdownMenuItem>
