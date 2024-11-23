@@ -1,24 +1,24 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { store } from "@/lib/store";
-import pdf from "html2pdf.js";
-import { TagIcon } from "lucide-react";
-import { useSnapshot } from "valtio";
+import { Button } from '@/components/ui/button'
+import { store } from '@/lib/store'
+import pdf from 'html2pdf.js'
+import { TagIcon } from 'lucide-react'
+import { useSnapshot } from 'valtio'
 
 export default function GerarEtiquetas() {
-  const snap = useSnapshot(store);
-  if (snap.etiquetas.length === 0) return null;
+  const snap = useSnapshot(store)
+  if (snap.etiquetas.length === 0) return null
 
   function handlePrint() {
-    const element = document.getElementById("print")!;
+    const element = document.getElementById('print')!
     pdf()
       .from(element)
       .set({
         jsPDF: {
-          unit: "mm",
-          format: "a4",
-          orientation: "portrait",
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait',
           compression: false,
           pagesplit: false,
         },
@@ -29,7 +29,7 @@ export default function GerarEtiquetas() {
           useCORS: true,
         },
       })
-      .save();
+      .save()
   }
   return (
     <div className="ml-auto">
@@ -38,5 +38,5 @@ export default function GerarEtiquetas() {
         <TagIcon size={16} className="ml-2" />
       </Button>
     </div>
-  );
+  )
 }

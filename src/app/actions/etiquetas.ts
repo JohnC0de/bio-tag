@@ -1,12 +1,12 @@
-"use server";
+'use server'
 
-import { type EtiquetaForm } from "@/app/etiquetas/form";
-import { db } from "@/server/db";
-import { etiquetasTable } from "@/server/db/schema";
-import { revalidatePath } from "next/cache";
+import { type EtiquetaForm } from '@/app/etiquetas/form'
+import { db } from '@/server/db'
+import { etiquetasTable } from '@/server/db/schema'
+import { revalidatePath } from 'next/cache'
 
 export async function createEtiqueta(data: EtiquetaForm) {
-  console.log("Creating etiqueta", data);
+  console.log('Creating etiqueta', data)
   await db.insert(etiquetasTable).values({
     npm: parseInt(data.npm),
     especie: data.especie,
@@ -20,10 +20,10 @@ export async function createEtiqueta(data: EtiquetaForm) {
     massa: data.massa,
     sexo: data.sexo,
     coletor: data.coletor,
-  });
-  revalidatePath("/etiquetas");
+  })
+  revalidatePath('/etiquetas')
 }
 
 export async function getEtiquetas() {
-  return await db.select().from(etiquetasTable);
+  return await db.select().from(etiquetasTable)
 }

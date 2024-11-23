@@ -1,34 +1,31 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { store } from "@/lib/store";
-import type { Etiqueta } from "@/server/db/schema";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-import { type ColumnDef } from "@tanstack/react-table";
-import { CopyIcon, PenIcon, Trash2Icon } from "lucide-react";
-import { flushSync } from "react-dom";
+} from '@/components/ui/dropdown-menu'
+import { store } from '@/lib/store'
+import type { Etiqueta } from '@/server/db/schema'
+import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { type ColumnDef } from '@tanstack/react-table'
+import { CopyIcon, PenIcon, Trash2Icon } from 'lucide-react'
+import { flushSync } from 'react-dom'
 
 export const columns: ColumnDef<Etiqueta>[] = [
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => {
-          table.toggleAllPageRowsSelected(!!value);
-          store.etiquetas = table.getRowModel().rows.map((row) => row.original);
-          console.log(store.etiquetas); // Log store state directly
+        checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
+        onCheckedChange={value => {
+          table.toggleAllPageRowsSelected(!!value)
+          store.etiquetas = table.getRowModel().rows.map(row => row.original)
+          console.log(store.etiquetas) // Log store state directly
         }}
         aria-label="Select all"
       />
@@ -37,73 +34,71 @@ export const columns: ColumnDef<Etiqueta>[] = [
       return (
         <Checkbox
           checked={row.getIsSelected()}
-          onCheckedChange={(value) => {
+          onCheckedChange={value => {
             flushSync(() => {
-              row.toggleSelected(!!value);
-            });
+              row.toggleSelected(!!value)
+            })
             // Update store.etiquetas with all currently selected rows
-            store.etiquetas = table
-              .getSelectedRowModel()
-              .rows.map((row) => row.original);
+            store.etiquetas = table.getSelectedRowModel().rows.map(row => row.original)
           }}
           aria-label="Select row"
         />
-      );
+      )
     },
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: "npm",
-    header: "NPM",
+    accessorKey: 'npm',
+    header: 'NPM',
   },
   {
-    accessorKey: "especie",
-    header: "Espécie",
+    accessorKey: 'especie',
+    header: 'Espécie',
   },
   {
-    accessorKey: "data",
-    header: "Data",
-    accessorFn: ({ data }) => (data ? new Date(data).toLocaleDateString() : ""),
+    accessorKey: 'data',
+    header: 'Data',
+    accessorFn: ({ data }) => (data ? new Date(data).toLocaleDateString() : ''),
   },
   {
-    accessorKey: "localizacao",
-    header: "Local",
+    accessorKey: 'localizacao',
+    header: 'Local',
   },
   {
-    accessorKey: "txd",
-    header: "TXD",
+    accessorKey: 'txd',
+    header: 'TXD',
   },
   {
-    accessorKey: "c_asa",
-    header: "ASA",
+    accessorKey: 'c_asa',
+    header: 'ASA',
   },
   {
-    accessorKey: "c_tarso",
-    header: "Tarso",
+    accessorKey: 'c_tarso',
+    header: 'Tarso',
   },
   {
-    accessorKey: "c_total",
-    header: "Total",
+    accessorKey: 'c_total',
+    header: 'Total',
   },
   {
-    accessorKey: "muda",
-    header: "Muda",
+    accessorKey: 'muda',
+    header: 'Muda',
   },
   {
-    accessorKey: "massa",
-    header: "Massa",
+    accessorKey: 'massa',
+    header: 'Massa',
   },
   {
-    accessorKey: "sexo",
-    header: "Sexo",
+    accessorKey: 'sexo',
+    header: 'Sexo',
   },
   {
-    accessorKey: "coletor",
-    header: "Coletor",
+    accessorKey: 'coletor',
+    header: 'Coletor',
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: () => {
       return (
@@ -130,7 +125,7 @@ export const columns: ColumnDef<Etiqueta>[] = [
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      );
+      )
     },
   },
-];
+]

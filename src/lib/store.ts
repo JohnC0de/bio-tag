@@ -1,10 +1,10 @@
-import type { Etiqueta } from "@/server/db/schema";
-import { proxy } from "valtio";
+import type { Etiqueta } from '@/server/db/schema'
+import { proxy } from 'valtio'
 
 export type Store = {
-  etiquetas: Etiqueta[];
-};
+  etiquetas: Etiqueta[]
+}
 
 export const store = proxy<Store>({
   etiquetas: [],
-});
+})

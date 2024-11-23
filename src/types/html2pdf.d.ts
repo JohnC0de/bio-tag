@@ -1,16 +1,16 @@
-declare module "html2pdf.js" {
+declare module 'html2pdf.js' {
   interface Html2PdfOptions {
-    jsPDF?: object;
-    html2canvas?: object;
+    jsPDF?: object
+    html2canvas?: object
   }
 
   interface Html2Pdf {
-    from(element: HTMLElement): Html2Pdf;
-    set(options: Html2PdfOptions): Html2Pdf;
-    save(): void;
+    from(element: HTMLElement): Html2Pdf
+    set(options: Html2PdfOptions): Html2Pdf
+    save(): void
   }
 
-  function html2pdf(): Html2Pdf;
+  function html2pdf(): Html2Pdf
 
-  export = html2pdf;
+  export = html2pdf
 }

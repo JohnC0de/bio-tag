@@ -1,17 +1,12 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MoonIcon, SunIcon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { MoonIcon, SunIcon } from 'lucide-react'
+import { useTheme } from 'next-themes'
 
 export function ThemeToggler() {
-  const { setTheme } = useTheme();
+  const { setTheme } = useTheme()
 
   return (
     <DropdownMenu>
@@ -23,16 +18,10 @@ export function ThemeToggler() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Claro
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Escuro
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          Padrão
-        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('light')}>Claro</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>Escuro</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>Padrão</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

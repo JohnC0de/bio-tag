@@ -1,7 +1,7 @@
-import { ThemeToggler } from "@/components/theme/toggler";
-import { Button } from "@/components/ui/button";
-import { LeafIcon } from "lucide-react";
-import Link from "next/link";
+import { ThemeToggler } from '@/components/theme/toggler'
+import { Button } from '@/components/ui/button'
+import { LeafIcon } from 'lucide-react'
+import Link from 'next/link'
 
 export function Navbar() {
   return (
@@ -19,5 +19,5 @@ export function Navbar() {
         <ThemeToggler />
       </div>
     </nav>
-  );
+  )
 }

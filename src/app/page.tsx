@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
@@ -11,15 +11,10 @@ export default function HomePage() {
               Simplifique sua rotulagem de taxidermia
             </h1>
             <p className="max-w-[700px] text-primary-foreground/90 drop-shadow-lg md:text-xl">
-              Bio-Tag é uma ferramenta poderosa que ajuda biólogos que trabalham
-              com taxidermia para gerar etiquetas PDF com aparência profissional
-              em A4 formatar.
+              Bio-Tag é uma ferramenta poderosa que ajuda biólogos que trabalham com taxidermia para gerar etiquetas PDF
+              com aparência profissional em A4 formatar.
             </p>
-            <Button
-              asChild
-              className="h-10 w-64 text-lg text-primary drop-shadow-xl"
-              variant="outline"
-            >
+            <Button asChild className="h-10 w-64 text-lg text-primary drop-shadow-xl" variant="outline">
               <Link href="/etiquetas">Começar</Link>
             </Button>
           </div>
@@ -27,12 +22,9 @@ export default function HomePage() {
       </section>
       <div className="bg-secondary drop-shadow-2xl">
         <section className="container mx-auto max-w-3xl space-y-6 py-32">
-          <h2 className="text-3xl font-bold tracking-tighter text-primary sm:text-5xl xl:text-6xl/none">
-            Recursos
-          </h2>
+          <h2 className="text-3xl font-bold tracking-tighter text-primary sm:text-5xl xl:text-6xl/none">Recursos</h2>
           <p className="text-muted-foreground">
-            Acesse os recursos abaixo para gerar etiquetas em PDF no formato A4
-            para seus projetos de taxidermia.
+            Acesse os recursos abaixo para gerar etiquetas em PDF no formato A4 para seus projetos de taxidermia.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             <Button asChild className="h-10 drop-shadow-xl">
@@ -40,20 +32,12 @@ export default function HomePage() {
                 Gerar Etiquetas
               </Link>
             </Button>
-            <Button
-              asChild
-              className="h-10 text-primary drop-shadow-xl"
-              variant="outline"
-            >
+            <Button asChild className="h-10 text-primary drop-shadow-xl" variant="outline">
               <Link href="/etiquetas" prefetch={false}>
                 Modelo de Etiqueta
               </Link>
             </Button>
-            <Button
-              asChild
-              className="h-10 text-primary drop-shadow-xl"
-              variant="outline"
-            >
+            <Button asChild className="h-10 text-primary drop-shadow-xl" variant="outline">
               <Link href="/etiquetas" prefetch={false}>
                 Tutorial
               </Link>
@@ -62,5 +46,5 @@ export default function HomePage() {
         </section>
       </div>
     </main>
-  );
+  )
 }

@@ -1,45 +1,25 @@
-"use client";
-import { createEtiqueta } from "@/app/actions/etiquetas";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format, setDefaultOptions } from "date-fns";
-import { ptBR } from "date-fns/locale";
-import { CalendarIcon, PlusIcon } from "lucide-react";
-import { useForm, type UseFormReturn } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
+'use client'
+import { createEtiqueta } from '@/app/actions/etiquetas'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { cn } from '@/lib/utils'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { format, setDefaultOptions } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { CalendarIcon, PlusIcon } from 'lucide-react'
+import { useForm, type UseFormReturn } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
 
-setDefaultOptions({ locale: ptBR });
+setDefaultOptions({ locale: ptBR })
 
 const etiquetaSchema = z.object({
-  npm: z.string().max(10, { message: "NPM muito longo" }),
-  especie: z
-    .string()
-    .min(3, "Nome da espécie muito curto")
-    .max(50, "Nome da espécie muito longo"),
+  npm: z.string().max(10, { message: 'NPM muito longo' }),
+  especie: z.string().min(3, 'Nome da espécie muito curto').max(50, 'Nome da espécie muito longo'),
   data: z.date(),
   localizacao: z.string(),
   txd: z.string(),
@@ -50,43 +30,40 @@ const etiquetaSchema = z.object({
   massa: z.string(),
   sexo: z.string(),
   // coletor is null or string with at least 3 character
-  coletor: z.string().max(50, { message: "Nome do coletor muito longo" }),
-});
+  coletor: z.string().max(50, { message: 'Nome do coletor muito longo' }),
+})
 
-export type EtiquetaForm = z.infer<typeof etiquetaSchema>;
+export type EtiquetaForm = z.infer<typeof etiquetaSchema>
 
 export function CreateEtiquetaForm() {
   const form = useForm<EtiquetaForm>({
     resolver: zodResolver(etiquetaSchema),
     defaultValues: {
-      especie: "",
+      especie: '',
       data: new Date(),
-      localizacao: "",
-      txd: "",
-      c_asa: "",
-      c_tarso: "",
-      c_total: "",
-      muda: "",
-      massa: "",
-      sexo: "",
-      coletor: "",
-      npm: "",
+      localizacao: '',
+      txd: '',
+      c_asa: '',
+      c_tarso: '',
+      c_total: '',
+      muda: '',
+      massa: '',
+      sexo: '',
+      coletor: '',
+      npm: '',
     },
-  });
+  })
 
   async function onSubmit(values: EtiquetaForm) {
-    console.log(values);
-    await createEtiqueta(values);
-    toast.success(`Etiqueta do espécime ${values.especie} criada com sucesso!`);
+    console.log(values)
+    await createEtiqueta(values)
+    toast.success(`Etiqueta do espécime ${values.especie} criada com sucesso!`)
     // toast.error("Erro ao criar etiqueta, tente novamente mais tarde.");
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
         <FormInput
           form={form}
           name="especie"
@@ -104,17 +81,10 @@ export function CreateEtiquetaForm() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
-                      className={cn(
-                        "w-full pl-3 text-left font-normal",
-                        !field.value && "text-muted-foreground",
-                      )}
+                      variant={'outline'}
+                      className={cn('w-full pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                     >
-                      {field.value ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Selecione uma data</span>
-                      )}
+                      {field.value ? format(field.value, 'PPP') : <span>Selecione uma data</span>}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
@@ -125,9 +95,7 @@ export function CreateEtiquetaForm() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
+                    disabled={date => date > new Date() || date < new Date('1900-01-01')}
                     initialFocus
                   />
                 </PopoverContent>
@@ -136,47 +104,12 @@ export function CreateEtiquetaForm() {
             </FormItem>
           )}
         />
-        <FormInput
-          form={form}
-          name="localizacao"
-          label="Localização"
-          placeholder="Arquipélago de Santana, Macaé, RJ"
-        />
-        <FormInput
-          form={form}
-          name="txd"
-          label="TXD"
-          placeholder="Ex: 127"
-          type="number"
-        />
-        <FormInput
-          form={form}
-          name="c_asa"
-          label="Comprimento da  Asa"
-          type="number"
-          placeholder="Ex: 132"
-        />
-        <FormInput
-          form={form}
-          name="c_tarso"
-          label="Comprimento Tarso"
-          type="number"
-          placeholder="Ex: 45"
-        />
-        <FormInput
-          form={form}
-          name="c_total"
-          label="Comprimento Total"
-          type="number"
-          placeholder="Ex: 81"
-        />
-        <FormInput
-          form={form}
-          name="massa"
-          label="Massa"
-          type="number"
-          placeholder="Ex: 1375"
-        />
+        <FormInput form={form} name="localizacao" label="Localização" placeholder="Arquipélago de Santana, Macaé, RJ" />
+        <FormInput form={form} name="txd" label="TXD" placeholder="Ex: 127" type="number" />
+        <FormInput form={form} name="c_asa" label="Comprimento da  Asa" type="number" placeholder="Ex: 132" />
+        <FormInput form={form} name="c_tarso" label="Comprimento Tarso" type="number" placeholder="Ex: 45" />
+        <FormInput form={form} name="c_total" label="Comprimento Total" type="number" placeholder="Ex: 81" />
+        <FormInput form={form} name="massa" label="Massa" type="number" placeholder="Ex: 1375" />
         <FormField
           control={form.control}
           name="muda"
@@ -206,10 +139,7 @@ export function CreateEtiquetaForm() {
             <FormItem>
               <FormLabel>Sexo</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Selecione uma opção" />
                   </SelectTrigger>
@@ -223,20 +153,9 @@ export function CreateEtiquetaForm() {
             </FormItem>
           )}
         />
-        <FormInput
-          form={form}
-          name="coletor"
-          label="Coletor(a) do espécime"
-          placeholder="Ex: Patricia Mancini"
-        />
+        <FormInput form={form} name="coletor" label="Coletor(a) do espécime" placeholder="Ex: Patricia Mancini" />
         <div className="flex gap-2">
-          <FormInput
-            form={form}
-            name="npm"
-            label="NPM"
-            type="number"
-            placeholder="Ex: 178"
-          />
+          <FormInput form={form} name="npm" label="NPM" type="number" placeholder="Ex: 178" />
           <Button className="mt-auto" type="submit">
             <p className="select-none">Criar Etiqueta</p>
             <PlusIcon size={18} className="ml-2" />
@@ -245,26 +164,19 @@ export function CreateEtiquetaForm() {
         </div>
       </form>
     </Form>
-  );
+  )
 }
 
 type FormInputProps = {
-  form: UseFormReturn<EtiquetaForm>;
-  name: keyof EtiquetaForm;
-  label?: string;
-  placeholder?: string;
-  type?: string;
-  required?: boolean;
-};
+  form: UseFormReturn<EtiquetaForm>
+  name: keyof EtiquetaForm
+  label?: string
+  placeholder?: string
+  type?: string
+  required?: boolean
+}
 
-const FormInput = ({
-  form,
-  name,
-  label,
-  placeholder,
-  type,
-  required = false,
-}: FormInputProps) => (
+const FormInput = ({ form, name, label, placeholder, type, required = false }: FormInputProps) => (
   <FormField
     control={form.control}
     name={name}
@@ -278,9 +190,7 @@ const FormInput = ({
             type={type}
             placeholder={placeholder}
             value={
-              typeof field.value === "string" || typeof field.value === "number"
-                ? field.value
-                : field.value.toString()
+              typeof field.value === 'string' || typeof field.value === 'number' ? field.value : field.value.toString()
             }
           />
         </FormControl>
@@ -288,4 +198,4 @@ const FormInput = ({
       </FormItem>
     )}
   />
-);
+)

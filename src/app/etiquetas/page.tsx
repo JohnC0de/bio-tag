@@ -1,21 +1,16 @@
-import { getEtiquetas } from "@/app/actions/etiquetas";
-import { columns } from "@/app/etiquetas/columns";
-import { CreateEtiquetaForm } from "@/app/etiquetas/form";
-import GerarEtiquetas from "@/app/etiquetas/gerar-etiquetas";
-import PreviewEtiquetas from "@/app/etiquetas/preview-etiquetas";
-import { DataTable } from "@/components/data-table";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { TagIcon } from "lucide-react";
+import { getEtiquetas } from '@/app/actions/etiquetas'
+import { columns } from '@/app/etiquetas/columns'
+import { CreateEtiquetaForm } from '@/app/etiquetas/form'
+import GerarEtiquetas from '@/app/etiquetas/gerar-etiquetas'
+import PreviewEtiquetas from '@/app/etiquetas/preview-etiquetas'
+import { DataTable } from '@/components/data-table'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { TagIcon } from 'lucide-react'
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'
 
 export default async function EtiquetasPage() {
-  const etiquetas = await getEtiquetas();
+  const etiquetas = await getEtiquetas()
   return (
     <div className="container my-4 grid gap-4 rounded-lg border py-4 shadow-lg">
       <h1 className="text-2xl font-semibold">Etiquetas</h1>
@@ -40,5 +35,5 @@ export default async function EtiquetasPage() {
       <GerarEtiquetas />
       <PreviewEtiquetas />
     </div>
-  );
+  )
 }
