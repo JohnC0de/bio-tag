@@ -1,17 +1,19 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import { store } from '@/lib/store'
 import pdf from 'html2pdf.js'
 import { TagIcon } from 'lucide-react'
 import { useSnapshot } from 'valtio'
+
+import { Button } from '@/components/ui/button'
+import { store } from '@/lib/store'
 
 export default function GerarEtiquetas() {
   const snap = useSnapshot(store)
   if (snap.etiquetas.length === 0) return null
 
   function handlePrint() {
-    const element = document.getElementById('print')!
+    const element = document.getElementById('print')
+    if (!element) return
     pdf()
       .from(element)
       .set({

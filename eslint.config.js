@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url'
 
 import { FlatCompat } from '@eslint/eslintrc'
 import eslint from '@eslint/js'
-import pluginQuery from '@tanstack/eslint-plugin-query'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import prettierPlugin from 'eslint-plugin-prettier/recommended'
 import pluginPromise from 'eslint-plugin-promise'
@@ -27,7 +26,6 @@ export default tseslint.config(
   ...tseslint.configs.strict,
   ...tseslint.configs.stylistic,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
-  ...pluginQuery.configs['flat/recommended'],
   //   "exclude": ["**/node_modules/*", "**/.*/", "dist", "build", ".next", "coverage", "bin", ".nixpacks"]
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}'],

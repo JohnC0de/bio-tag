@@ -1,4 +1,12 @@
 'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { format, setDefaultOptions } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
+import { CalendarIcon, PlusIcon } from 'lucide-react'
+import { useForm, type UseFormReturn } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
+
 import { createEtiqueta } from '@/app/actions/etiquetas'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -7,13 +15,6 @@ import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { format, setDefaultOptions } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
-import { CalendarIcon, PlusIcon } from 'lucide-react'
-import { useForm, type UseFormReturn } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
 
 setDefaultOptions({ locale: ptBR })
 
@@ -167,7 +168,7 @@ export function CreateEtiquetaForm() {
   )
 }
 
-type FormInputProps = {
+interface FormInputProps {
   form: UseFormReturn<EtiquetaForm>
   name: keyof EtiquetaForm
   label?: string

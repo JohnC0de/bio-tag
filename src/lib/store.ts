@@ -1,7 +1,8 @@
-import type { Etiqueta } from '@/server/db/schema'
 import { proxy } from 'valtio'
 
-export type Store = {
+import type { Etiqueta } from '@/server/db/schema'
+
+export interface Store {
   etiquetas: Etiqueta[]
 }
 

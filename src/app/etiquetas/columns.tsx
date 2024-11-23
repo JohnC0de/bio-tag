@@ -1,5 +1,13 @@
 'use client'
 
+import { DotsHorizontalIcon } from '@radix-ui/react-icons'
+import { type ColumnDef } from '@tanstack/react-table'
+import { eq } from 'drizzle-orm'
+import { CopyIcon, PenIcon, Trash2Icon } from 'lucide-react'
+import { flushSync } from 'react-dom'
+import { toast } from 'sonner'
+
+import { deleteEtiqueta } from '@/app/actions/etiquetas'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -11,13 +19,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { store } from '@/lib/store'
 import type { Etiqueta } from '@/server/db/schema'
-import { DotsHorizontalIcon } from '@radix-ui/react-icons'
-import { type ColumnDef } from '@tanstack/react-table'
-import { CopyIcon, PenIcon, Trash2Icon } from 'lucide-react'
-import { flushSync } from 'react-dom'
-import { deleteEtiqueta } from '@/app/actions/etiquetas'
-import { eq } from 'drizzle-orm'
-import { toast } from 'sonner'
 
 export const columns: ColumnDef<Etiqueta>[] = [
   {

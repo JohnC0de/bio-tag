@@ -1,10 +1,11 @@
 'use server'
 
+import { eq } from 'drizzle-orm'
+import { revalidatePath } from 'next/cache'
+
 import { type EtiquetaForm } from '@/app/etiquetas/form'
 import { db } from '@/server/db'
 import { etiquetasTable } from '@/server/db/schema'
-import { revalidatePath } from 'next/cache'
-import { eq } from 'drizzle-orm'
 
 export async function createEtiqueta(data: EtiquetaForm) {
   console.log('Creating etiqueta', data)

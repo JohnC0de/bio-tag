@@ -1,7 +1,8 @@
-import { ThemeToggler } from '@/components/theme/toggler'
-import { Button } from '@/components/ui/button'
 import { LeafIcon } from 'lucide-react'
 import Link from 'next/link'
+
+import { ThemeToggler } from '@/components/theme/toggler'
+import { Button } from '@/components/ui/button'
 
 export function Navbar() {
   return (

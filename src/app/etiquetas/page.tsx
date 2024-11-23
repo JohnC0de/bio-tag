@@ -1,3 +1,5 @@
+import { TagIcon } from 'lucide-react'
+
 import { getEtiquetas } from '@/app/actions/etiquetas'
 import { columns } from '@/app/etiquetas/columns'
 import { CreateEtiquetaForm } from '@/app/etiquetas/form'
@@ -5,7 +7,6 @@ import GerarEtiquetas from '@/app/etiquetas/gerar-etiquetas'
 import PreviewEtiquetas from '@/app/etiquetas/preview-etiquetas'
 import { DataTable } from '@/components/data-table'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { TagIcon } from 'lucide-react'
 
 export const dynamic = 'force-dynamic'
 

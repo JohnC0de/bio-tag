@@ -1,8 +1,9 @@
 'use client'
 
+import { useSnapshot } from 'valtio'
+
 import { store } from '@/lib/store'
 import type { Etiqueta } from '@/server/db/schema'
-import { useSnapshot } from 'valtio'
 
 export default function PreviewEtiquetas() {
   const snap = useSnapshot(store)
