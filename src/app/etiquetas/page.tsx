@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 export default async function EtiquetasPage() {
   const etiquetas = await getEtiquetas()
   return (
-    <div className="container my-4 grid gap-4 rounded-lg border py-4 shadow-lg">
+    <div className="container mx-auto my-4 grid gap-4 rounded-lg border p-4 py-4 shadow-lg">
       <h1 className="text-2xl font-semibold">Etiquetas</h1>
 
       <Accordion type="single" collapsible>

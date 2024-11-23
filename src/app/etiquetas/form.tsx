@@ -76,8 +76,8 @@ export function CreateEtiquetaForm() {
           control={form.control}
           name="data"
           render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Data</FormLabel>
+            <FormItem className="flex flex-col gap-0.5">
+              <FormLabel className="mt-1">Data</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
