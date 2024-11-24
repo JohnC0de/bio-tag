@@ -2,7 +2,6 @@
 
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { type ColumnDef } from '@tanstack/react-table'
-import { eq } from 'drizzle-orm'
 import { CopyIcon, PenIcon, Trash2Icon } from 'lucide-react'
 import { flushSync } from 'react-dom'
 import { toast } from 'sonner'
@@ -19,6 +18,9 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { store } from '@/lib/store'
 import type { Etiqueta } from '@/server/db/schema'
+
+import { EditDialog } from './edit-dialog'
+import type { EtiquetaForm } from './form'
 
 export const columns: ColumnDef<Etiqueta>[] = [
   {
@@ -117,6 +119,27 @@ export const columns: ColumnDef<Etiqueta>[] = [
         }
       }
 
+      function handleCopy() {
+        // Convert etiqueta to form data format with type conversion
+        const formData: EtiquetaForm = {
+          ...etiqueta,
+          npm: etiqueta.npm?.toString() ?? '',
+          data: etiqueta.data ? new Date(etiqueta.data) : new Date(),
+          especie: etiqueta.especie ?? '',
+          localizacao: etiqueta.localizacao ?? '',
+          txd: etiqueta.txd ?? '',
+          c_asa: etiqueta.c_asa ?? '',
+          c_tarso: etiqueta.c_tarso ?? '',
+          c_total: etiqueta.c_total ?? '',
+          muda: etiqueta.muda ?? '',
+          massa: etiqueta.massa ?? '',
+          sexo: etiqueta.sexo ?? '',
+          coletor: etiqueta.coletor ?? '',
+        }
+        store.formData = formData
+        toast.success('Dados copiados para o formulário!')
+      }
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -131,11 +154,16 @@ export const columns: ColumnDef<Etiqueta>[] = [
               <p className="font-semibold">Excluir</p>
               <Trash2Icon size={16} />
             </DropdownMenuItem>
-            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
-              <p className="font-semibold">Editar</p>
-              <PenIcon size={16} />
-            </DropdownMenuItem>
-            <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+            <EditDialog
+              etiqueta={etiqueta}
+              trigger={
+                <DropdownMenuItem className="flex justify-between gap-4 leading-3">
+                  <p className="font-semibold">Editar</p>
+                  <PenIcon size={16} />
+                </DropdownMenuItem>
+              }
+            />
+            <DropdownMenuItem className="flex justify-between gap-4 leading-3" onClick={handleCopy}>
               <p className="font-semibold">Copiar</p>
               <CopyIcon size={16} />
             </DropdownMenuItem>

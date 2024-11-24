@@ -29,6 +29,8 @@ export default function GerarEtiquetas() {
           dpi: 600,
           letterRendering: true,
           useCORS: true,
+          windowWidth: 210,
+          windowHeight: 297,
         },
       })
       .save()

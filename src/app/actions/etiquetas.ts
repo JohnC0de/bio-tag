@@ -34,3 +34,24 @@ export async function deleteEtiqueta(id: number) {
   await db.delete(etiquetasTable).where(eq(etiquetasTable.id, id))
   revalidatePath('/etiquetas')
 }
+
+export async function updateEtiqueta(id: number, data: EtiquetaForm) {
+  await db
+    .update(etiquetasTable)
+    .set({
+      npm: parseInt(data.npm),
+      especie: data.especie,
+      data: data.data,
+      localizacao: data.localizacao,
+      txd: data.txd,
+      c_asa: data.c_asa,
+      c_tarso: data.c_tarso,
+      c_total: data.c_total,
+      muda: data.muda,
+      massa: data.massa,
+      sexo: data.sexo,
+      coletor: data.coletor,
+    })
+    .where(eq(etiquetasTable.id, id))
+  revalidatePath('/etiquetas')
+}

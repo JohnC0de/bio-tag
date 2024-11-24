@@ -3,8 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { format, setDefaultOptions } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { CalendarIcon, PlusIcon } from 'lucide-react'
+import { useEffect } from 'react'
 import { useForm, type UseFormReturn } from 'react-hook-form'
 import { toast } from 'sonner'
+import { useSnapshot } from 'valtio'
 import { z } from 'zod'
 
 import { createEtiqueta } from '@/app/actions/etiquetas'
@@ -14,6 +16,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { store } from '@/lib/store'
 import { cn } from '@/lib/utils'
 
 setDefaultOptions({ locale: ptBR })
@@ -37,6 +40,7 @@ const etiquetaSchema = z.object({
 export type EtiquetaForm = z.infer<typeof etiquetaSchema>
 
 export function CreateEtiquetaForm() {
+  const { formData } = useSnapshot(store)
   const form = useForm<EtiquetaForm>({
     resolver: zodResolver(etiquetaSchema),
     defaultValues: {
@@ -54,6 +58,13 @@ export function CreateEtiquetaForm() {
       npm: '',
     },
   })
+
+  useEffect(() => {
+    if (formData) {
+      form.reset(formData)
+      store.formData = null
+    }
+  }, [formData, form])
 
   async function onSubmit(values: EtiquetaForm) {
     console.log(values)
@@ -177,7 +188,7 @@ interface FormInputProps {
   required?: boolean
 }
 
-const FormInput = ({ form, name, label, placeholder, type, required = false }: FormInputProps) => (
+export const FormInput = ({ form, name, label, placeholder, type, required = false }: FormInputProps) => (
   <FormField
     control={form.control}
     name={name}
