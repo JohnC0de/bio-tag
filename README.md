@@ -1,7 +1,5 @@
 # Bio Tag
 
-[Bio Tag já está disponível para uso!](https://bio-tag.vercel.app/)
-
 Bio Tag é um projeto desenvolvido para ajudar biólogos que trabalham com taxidermia a gerar etiquetas em PDF no formato A4, facilitando a impressão, recorte e uso das etiquetas. A motivação do projeto é automatizar e simplificar o processo manual e exaustivo de criar etiquetas usando programas como o Word. Com o Bio-Tag, é possível criar designs de etiquetas mais padronizados com facilidade, realizar edições em massa, importar e exportar dados em CSV, salvar as etiquetas na nuvem, visualizar etiquetas de forma isolada e oferecer uma usabilidade aprimorada para o usuário.
 
 ## Tecnologias Utilizadas
